@@ -27,6 +27,7 @@ class Home extends Component {
                 <Text>Number of suspected seizures: 2</Text>
                 <Text>Average duration of seizures: 0:23</Text>
                 <Chart style={styles.chart}/>
+                <Text>Number of seizures per month</Text>
             </View>
         );
     }

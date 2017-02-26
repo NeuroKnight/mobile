@@ -44,7 +44,7 @@ export default class NeuroKnight extends Component {
   render() {
     return (
 
-            <Navigator initialRoute={{id: 'IntroPage', name: 'IntroPage'}} renderScene={this.renderScene}
+            <Navigator initialRoute={{id: 'Settings', name: 'Settings'}} renderScene={this.renderScene}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
                         return route.sceneConfig;
