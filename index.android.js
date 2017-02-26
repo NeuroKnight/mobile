@@ -20,12 +20,13 @@ import TopAndBottom from './App/Components/TopAndBottom.js'
 import Statistics from './App/Components/Statistics.js'
 import Settings from './App/Components/Settings.js'
 import SingleDay from './App/Components/SingleDay.js'
-
+import IntroPage from './App/Components/IntroPage.js'
 
 // you can set your style right here, it'll be propagated to application
 const uiTheme = {
    palette: {
-       primaryColor: "#CBA6c3",
+       primaryColor: "#682995",
+       accentColor: "#FFFFFF"
    },
    toolbar: {
        container: {
@@ -43,7 +44,7 @@ export default class NeuroKnight extends Component {
   render() {
     return (
 
-            <Navigator initialRoute={{id: 'Home', name: 'Home'}} renderScene={this.renderScene}
+            <Navigator initialRoute={{id: 'IntroPage', name: 'IntroPage'}} renderScene={this.renderScene}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
                         return route.sceneConfig;
@@ -66,7 +67,8 @@ export default class NeuroKnight extends Component {
         return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Settings" navigator={navigator}><Settings navigator={navigator} /></TopAndBottom></ThemeProvider>);
       case 'SingleDay':
         return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="On This Day" navigator={navigator}><SingleDay navigator={navigator} {...route.passProps} /></TopAndBottom></ThemeProvider>);
-
+      case 'IntroPage':
+        return (<ThemeProvider uiTheme={uiTheme}><IntroPage navigator={navigator}/></ThemeProvider>)
     }
   }
 }

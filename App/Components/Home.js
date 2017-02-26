@@ -10,18 +10,103 @@ import {
   TouchableHighlight,
   View
 } from 'react-native';
-import { Toolbar, Button } from 'react-native-material-ui';
+import { Toolbar, Button, Divider} from 'react-native-material-ui';
 import TopAndBottom from './TopAndBottom.js'
+import { StockLine } from 'react-native-pathjs-charts'
+
+let options = {
+    width:180,
+        height:200,
+        color:'#2980B9',
+        margin: {top: 40, left: 60, bottom: 50, right: 20},
+
+        axisX: {
+            showAxis: true,
+            showLines: true,
+            showLabels: true,
+            showTicks: true,
+            zeroAxis: true,
+            orient: 'bottom',
+            label:{
+                fontFamily:'Arial',
+                fontSize:14,
+                fontWeight:true,
+                fill:'#34495E'
+            }
+        },
+        axisY: {
+            showAxis: true,
+            showLines: true,
+            showLabels: true,
+            showTicks: true,
+            zeroAxis: true,
+            orient: 'left',
+            label:{
+                fontFamily:'Arial',
+                fontSize:14,
+                fontWeight:true,
+                fill:'#34495E'
+            }
+        }
+    }
+
 class Home extends Component {
 
     constructor(props) {
        super(props);
        console.log(this.props);
+       this.state = {
+           muscleData:[[{x:0,y:0}]],
+           heartData:[[{x:0,y:0}]],
+           breathingData:[[{x:0,y:0}]],
+       }
+     }
+     componentDidMount(){
+         this.getMuscleData();
+         this.getHeartData();
+         this.getBreathingData();
+
+     }
+     getMuscleData(){
+         for (var i = 0; i < 20; i++) {
+                 var arr = this.state.muscleData[0];
+                 arr.push({x:i,y: (400 + (Math.random() * 52))});
+                 this.setState({muscleData: [arr]})
+                 console.log(arr);
+         }
+     }
+     getHeartData(){
+         for (var i = 0; i < 20; i++) {
+                 var arr = this.state.heartData[0];
+                 arr.push({x:i,y: (70 + (Math.random() * 12))});
+                 this.setState({heartData: [arr]})
+                 console.log(arr);
+         }
+     }
+     getBreathingData(){
+         for (var i = 0; i < 20; i++) {
+                 var arr = this.state.breathingData[0];
+                 arr.push({x:i,y: (100 + (Math.random()*10 * Math.pow(-1, i)))});
+                 this.setState({breathingData: [arr]})
+                 console.log(arr);
+         }
      }
     render() {
         return (
-                        <Text> Here are your statistics for the day!</Text>
+            <ScrollView contentContainerStyle={styles.scrollerStyle}>
+                <Text style={styles.textStyle}>Live muscle monitor</Text>
+                <View style={styles.chartContainerStyle}><Text>Tension</Text><StockLine max={1000} data={this.state.muscleData} options={options} xKey ="x" yKey="y"/></View>
+                <Text>Time</Text>
+                <Divider/>
+                <Text style={styles.textStyle}>Live Heart monitor</Text>
+                <View style={styles.chartContainerStyle}><Text>BPM</Text><StockLine max={110} data={this.state.heartData} options={options} xKey ="x" yKey="y"/></View>
+                <Text>Time</Text>
+                <Divider/>
+                <Text style={styles.textStyle}>Live breathing monitor</Text>
+                <View style={styles.chartContainerStyle}><Text style={styles.yLabelStyle}>Degrees</Text><StockLine max={120} data={this.state.breathingData} options={options} xKey ="x" yKey="y"/></View>
+                <Text>Time</Text>
 
+            </ScrollView>
         );
     }
 }
@@ -32,9 +117,22 @@ const styles = {
     headerStyle:{
         color: "AAABD3"
     },
+    textStyle:{
+        fontSize:24
+    },
+    scrollerStyle:{
+        alignItems: 'center'
+    },
     centerContainer:{
         flex: 100,
         flexDirection: 'column'
+    },
+    yLabelStyle:{
+            left:0
+    },
+    chartContainerStyle:{
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 };
 

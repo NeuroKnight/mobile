@@ -42,10 +42,7 @@ class Home extends Component {
                     <Button onPress={()=>{this.saveNumber()}} primary text="Save Number" />
                 </View>
                 <Text>Number On File: {this.state.onFile}</Text>
-                <Divider/>
-                <Text>Select disorders you want the app to lookout for</Text>
-                <Divider/>
-
+                
 
             </View>
         );

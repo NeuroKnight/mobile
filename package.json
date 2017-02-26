@@ -20,7 +20,6 @@
     "react-native-phone-input": "^0.1.6",
     "react-native-side-menu": "^0.20.1",
     "react-native-sidebar": "^0.2.0",
-    "react-native-telephone-input": "^1.0.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
