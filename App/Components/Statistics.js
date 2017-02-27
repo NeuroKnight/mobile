@@ -24,7 +24,7 @@ class Home extends Component {
         return (
             <View>
                 <Text>February 26, 2017</Text>
-                <Text>Number of suspected seizures: 2</Text>
+                <Text>Number of projected seizures next week: 1</Text>
                 <Text>Average duration of seizures: 0:23</Text>
                 <Chart style={styles.chart}/>
                 <Text>Number of seizures per month</Text>

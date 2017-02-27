@@ -13,6 +13,8 @@ import {
 import { Toolbar, Button, Divider} from 'react-native-material-ui';
 import TopAndBottom from './TopAndBottom.js'
 import { StockLine } from 'react-native-pathjs-charts'
+import BackgroundTimer from 'react-native-background-timer';
+
 
 let options = {
     width:180,
@@ -23,7 +25,6 @@ let options = {
         axisX: {
             showAxis: true,
             showLines: true,
-            showLabels: true,
             showTicks: true,
             zeroAxis: true,
             orient: 'bottom',
@@ -56,24 +57,47 @@ class Home extends Component {
        super(props);
        console.log(this.props);
        this.state = {
-           muscleData:[[{x:0,y:0}]],
+           muscleData:[[{record_time:0,value:0}]],
            heartData:[[{x:0,y:0}]],
            breathingData:[[{x:0,y:0}]],
        }
      }
      componentDidMount(){
-         this.getMuscleData();
-         this.getHeartData();
-         this.getBreathingData();
+
+
+         var _this = this;
+         _this.getMuscleData();
+         _this.getHeartData();
+         _this.getBreathingData();
+
 
      }
      getMuscleData(){
-         for (var i = 0; i < 20; i++) {
-                 var arr = this.state.muscleData[0];
-                 arr.push({x:i,y: (400 + (Math.random() * 52))});
-                 this.setState({muscleData: [arr]})
-                 console.log(arr);
-         }
+         fetch('https://07bec859.ngrok.io/api/user/get_measurements', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                token: "1",
+                instrument: "muscle"
+              })
+            }).then((response) => response.json())
+              .then((responseJson) => {
+                  console.log(responseJson);
+                  if(responseJson.status==200){
+                      if(responseJson.data.results.length>0){
+                          this.setState({muscleData:[responseJson.data.results]});
+                      }
+                    }else{
+
+
+                    }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
      }
      getHeartData(){
          for (var i = 0; i < 20; i++) {
@@ -95,7 +119,7 @@ class Home extends Component {
         return (
             <ScrollView contentContainerStyle={styles.scrollerStyle}>
                 <Text style={styles.textStyle}>Live muscle monitor</Text>
-                <View style={styles.chartContainerStyle}><Text>Tension</Text><StockLine max={1000} data={this.state.muscleData} options={options} xKey ="x" yKey="y"/></View>
+                <View style={styles.chartContainerStyle}><Text>Tension</Text><StockLine max={1000} data={this.state.muscleData} options={options} xKey ="record_time" yKey="value"/></View>
                 <Text>Time</Text>
                 <Divider/>
                 <Text style={styles.textStyle}>Live Heart monitor</Text>

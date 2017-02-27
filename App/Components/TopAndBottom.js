@@ -36,7 +36,7 @@ class Home extends Component {
                   <View style={styles.centerContainer}>
                         {this.props.children}
                   </View>
-                  <Menu setActive={this.setActive.bind(this)} active={this.state.active} navigator={this.props.navigator}/>
+                  <Menu setActive={this.setActive.bind(this)} active={this.props.active} navigator={this.props.navigator}/>
               </View>
         );
     }

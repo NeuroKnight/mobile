@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { BottomNavigation } from 'react-native-material-ui';
 
+
+
 class Menu extends Component {
 
         constructor(props) {
@@ -22,28 +24,41 @@ class Menu extends Component {
         this.props.setActive("History");
         this.props.navigator.replace({
           id: 'Calendar',
-          name:'Calendar'
+          name:'Calendar',
+          passProps: {
+              active: "History"
+            }
+
         });
     }
     goHome(){
         this.props.setActive("Home")
         this.props.navigator.replace({
           id: 'Home',
-          name:'Home'
+          name:'Home',
+          passProps: {
+              active: "Home"
+            }
         });
     }
     goStatistics(){
         this.props.setActive("Statistics")
         this.props.navigator.replace({
           id: 'Statistics',
-          name:'Statistics'
+          name:'Statistics',
+          passProps: {
+              active: "Statistics"
+            }
         });
     }
     goSettings(){
         this.props.setActive("Settings")
         this.props.navigator.replace({
           id: 'Settings',
-          name:'Settings'
+          name:'Settings',
+          passProps: {
+              active: "Settings"
+            }
         });
     }
     render() {
@@ -68,7 +83,7 @@ class Menu extends Component {
                     onPress={() => this.goStatistics()}
                 />
                 <BottomNavigation.Action
-                    key="settings"
+                    key="Settings"
                     icon="settings"
                     label="Settings"
                     onPress={() => this.goSettings()}

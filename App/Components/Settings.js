@@ -58,6 +58,7 @@ class Home extends Component {
 
      }
      saveNumber(){
+         console.log("SDF");
          fetch('https://07bec859.ngrok.io/api/user/relative', {
               method: 'POST',
               headers: {
@@ -74,6 +75,8 @@ class Home extends Component {
                   if(responseJson.status==200){
                       this.setState({onFile: this.state.name + " " + this.state.beingEntered});
 
+                  }else {
+                      console.log(responseJson);
                   }
 
               })

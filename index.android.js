@@ -44,7 +44,7 @@ export default class NeuroKnight extends Component {
   render() {
     return (
 
-            <Navigator initialRoute={{id: 'Settings', name: 'Settings'}} renderScene={this.renderScene}
+            <Navigator initialRoute={{id: 'IntroPage', name: 'IntroPage'}} renderScene={this.renderScene}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
                         return route.sceneConfig;
@@ -58,13 +58,13 @@ export default class NeuroKnight extends Component {
   renderScene (route, navigator){
     switch (route.id) {
       case 'Home':
-        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Home" navigator={navigator}><Home navigator={navigator} /></TopAndBottom></ThemeProvider>);
+        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Home" navigator={navigator} {...route.passProps} ><Home navigator={navigator} /></TopAndBottom></ThemeProvider>);
       case 'Calendar':
-        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="History" navigator={navigator}><TrackingCalendar navigator={navigator} /></TopAndBottom></ThemeProvider>);
+        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="History" navigator={navigator} {...route.passProps} ><TrackingCalendar navigator={navigator} /></TopAndBottom></ThemeProvider>);
       case 'Statistics':
-        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Statistics" navigator={navigator}><Statistics navigator={navigator} /></TopAndBottom></ThemeProvider>);
+        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Statistics" navigator={navigator} {...route.passProps} ><Statistics navigator={navigator} /></TopAndBottom></ThemeProvider>);
       case 'Settings':
-        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Settings" navigator={navigator}><Settings navigator={navigator} /></TopAndBottom></ThemeProvider>);
+        return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="Settings" navigator={navigator} {...route.passProps} ><Settings navigator={navigator} /></TopAndBottom></ThemeProvider>);
       case 'SingleDay':
         return (<ThemeProvider uiTheme={uiTheme}><TopAndBottom title="On This Day" navigator={navigator}><SingleDay navigator={navigator} {...route.passProps} /></TopAndBottom></ThemeProvider>);
       case 'IntroPage':
